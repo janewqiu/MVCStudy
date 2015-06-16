@@ -26,7 +26,7 @@ namespace ServiceStackOrmliteMvc.Helpers
 
         public static string RemoveAccent(this string txt)
         {
-            byte[] bytes = System.Text.Encoding.GetEncoding("Cyrillic").GetBytes(txt);
+            byte[] bytes = System.Text.Encoding.GetEncoding("gb2312").GetBytes(txt);
             return System.Text.Encoding.ASCII.GetString(bytes);
         }
     }

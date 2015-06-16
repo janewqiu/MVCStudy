@@ -34,7 +34,7 @@ namespace CAIROCrons.Models
 
         [System.ComponentModel.DataAnnotations.UIHint("WYSIWYG")]
         [AllowHtml]
-        [StringLength(500)]
+        [StringLength(50000)]
         public string Details { get; set; }
 
         [StringLength(150)]
