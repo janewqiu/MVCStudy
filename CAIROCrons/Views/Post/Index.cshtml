@@ -1,0 +1,14 @@
+﻿@model IList<CAIROCrons.Models.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Posts</h2>
+ 
+
+<p>
+    @Html.ActionLink("New Post", "Create")
+</p>
+
+@Html.DisplayForModel()

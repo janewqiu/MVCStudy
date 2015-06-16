@@ -1,0 +1,17 @@
+﻿@model CAIROCrons.Models.Post
+
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2>Update</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.Id);
+    @Html.EditorForModel()
+
+    <p>
+        <input type="submit" value="Update" />
+    </p>
+}

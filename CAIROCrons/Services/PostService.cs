@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using ServiceStack.OrmLite;
-using ServiceStackMvc;
+using ServiceStackOrmliteMvc;
 using System.Web;
 using ServiceStack.DataAnnotations;
 using System.IO;
@@ -51,14 +51,10 @@ namespace CAIROCrons.Services
         {
             using (IDbConnection dbConn = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString.OpenDbConnection())
             {
-                // using (IDbCommand dbCmd = dbConn.CreateCommand())
-                //  {
-                //using (IDbTransaction dbTrans = dbCmd.BeginTransaction())
-                //{
+ 
                 var res = dbConn.Select<Post>();
                 return res;
-                // }
-                //  }
+ 
             }
         }
         

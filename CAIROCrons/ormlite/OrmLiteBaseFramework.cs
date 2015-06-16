@@ -5,7 +5,7 @@ using System.Data;
 using ServiceStack.OrmLite;
 using ServiceStack.Logging;
 
-namespace ServiceStackMvc.Services
+namespace ServiceStackOrmliteMvc.Services
 {
   
 

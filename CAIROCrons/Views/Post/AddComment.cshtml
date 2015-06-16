@@ -1,0 +1,16 @@
+﻿@model CAIROCrons.Models.Comment
+
+@using (Html.BeginForm("AddComment", "Post", FormMethod.Post))
+{   
+    
+    <div> 
+        Add Comment
+        <br />
+        @Html.TextAreaFor(m => m.Detail)
+        @Html.ValidationMessageFor(m => m.Detail)
+        @Html.HiddenFor( m=>m.PostId )
+        
+        <br />
+        <input type="submit" value="Add Comment" />
+    </div>
+}

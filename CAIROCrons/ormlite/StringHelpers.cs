@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace ServiceStackMvc.Helpers
+namespace ServiceStackOrmliteMvc.Helpers
 {
     public static class StringHelpers
     {

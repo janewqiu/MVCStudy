@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using ServiceStack.OrmLite;
-using ServiceStackMvc;
+using ServiceStackOrmliteMvc;
 using System.Web;
 using ServiceStack.DataAnnotations;
 using System.IO;
