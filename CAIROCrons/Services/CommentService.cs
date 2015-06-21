@@ -23,7 +23,7 @@ namespace CAIROCrons.Services
         {
             // Guid Id = (Guid) HttpContext.Current.Session["Id"];
             Guid Id = Guid.Parse(HttpContext.Current.Request.Form["PostId"]);
-            using (IDbConnection dbConn = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString.OpenDbConnection())
+            using (IDbConnection dbConn = CAIROCronsApp.DBConn.OpenDbConnection())
             {
                 {
                     Post post = dbConn.Select<Post>(u => u.Id == Id).FirstOrDefault();
@@ -37,7 +37,7 @@ namespace CAIROCrons.Services
         }
         public void RemoveComment(Guid Id, Guid commentId)
         {
-            using (IDbConnection dbConn = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString.OpenDbConnection())
+            using (IDbConnection dbConn = CAIROCronsApp.DBConn.OpenDbConnection())
             {
                 Post post = dbConn.Select<Post>(u => u.Id == Id).FirstOrDefault();
                 post.TotalComments--;
@@ -53,7 +53,7 @@ namespace CAIROCrons.Services
         }
         public int GetTotalComments(Guid Id)
         {
-            using (IDbConnection dbConn = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString.OpenDbConnection())
+            using (IDbConnection dbConn = CAIROCronsApp.DBConn.OpenDbConnection())
             {
                 return dbConn.Select<Comment>().Count(u => u.Id == Id);
             }

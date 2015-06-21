@@ -24,7 +24,7 @@ namespace CAIROCrons.Services
         public void Create(Post post)
         {
             post.Comments = new List<Comment>();
-            using (IDbConnection dbConn = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString.OpenDbConnection())
+            using (IDbConnection dbConn = CAIROCronsApp.DBConn.OpenDbConnection())
             {
                 dbConn.Insert(post);
                 HttpContext.Current.Session["Id"] = post.Id;
@@ -33,7 +33,7 @@ namespace CAIROCrons.Services
        
         public void Edit(Post post)
         {
-            using (IDbConnection dbConn = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString.OpenDbConnection())
+            using (IDbConnection dbConn = CAIROCronsApp.DBConn.OpenDbConnection())
             { 
                 dbConn.Update(post);
             }
@@ -41,7 +41,7 @@ namespace CAIROCrons.Services
         
         public void Delete(Guid Id)
         {
-            using (IDbConnection dbConn = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString.OpenDbConnection())
+            using (IDbConnection dbConn = CAIROCronsApp.DBConn.OpenDbConnection())
             {
                 dbConn.DeleteById<Post>(Id);
             }
@@ -49,7 +49,7 @@ namespace CAIROCrons.Services
         
         public IList<Post> GetPosts()
         {
-            using (IDbConnection dbConn = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString.OpenDbConnection())
+            using (IDbConnection dbConn = CAIROCronsApp.DBConn.OpenDbConnection())
             {
  
                 var res = dbConn.Select<Post>();
@@ -60,7 +60,7 @@ namespace CAIROCrons.Services
         
         public Post GetPost(Guid id)
         {
-            using (IDbConnection dbConn = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString.OpenDbConnection())
+            using (IDbConnection dbConn = CAIROCronsApp.DBConn.OpenDbConnection())
             {
                 return dbConn.Select<Post>().Where(x => x.Id == id).FirstOrDefault();
             }
@@ -68,7 +68,7 @@ namespace CAIROCrons.Services
 
         public Post GetPost(string url)
         {
-            using (IDbConnection dbConn = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString.OpenDbConnection())
+            using (IDbConnection dbConn = CAIROCronsApp.DBConn.OpenDbConnection())
             {
                 return dbConn.Select<Post>().Where(x => x.Url == url).FirstOrDefault();
             }

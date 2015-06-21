@@ -45,8 +45,30 @@ namespace CAIROCrons.Models
 
     public enum TaskTypes
     {
-        Email, SQL, FTP
+        EmailScript, SQLScript, FTPScript , CommandLineBAT , PowerShellScript
     }
+
+
+
+    [Alias("Holidays")]
+    public class Holidays
+    {
+ 
+        public Holidays()
+        {
+            if (this.Id == Guid.Empty) this.Id = Guid.NewGuid();
+        }
+
+        public Guid Id { get; set; }
+
+        public string Title { get; set; }
+
+        public DateTime Holiday { get; set; }
+       
+        public string Provincial { get; set; }
+
+    }
+
 
     [Alias("TaskSetting")]
     public class TaskSetting

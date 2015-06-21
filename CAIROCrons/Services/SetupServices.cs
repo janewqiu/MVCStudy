@@ -30,7 +30,7 @@ namespace CAIROCrons.Services
         {
 
             OrmLiteConfig.DialectProvider = MySqlDialect.Provider;
-            string ConnectionString = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+            string ConnectionString = CAIROCronsApp.DBConn;
 
             //OrmLiteConnectionFactory DbFactory = new OrmLiteConnectionFactory(ConnectionString, MySqlDialect.Provider);
                 

@@ -24,12 +24,18 @@ namespace CAIROCrons
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
 
-    public class MvcApplication : System.Web.HttpApplication
+    public class CAIROCronsApp : System.Web.HttpApplication
     {
         public static int counter = 0;
         public SchedulerServices services = null;
+
+        public static string DBConn = null;
+
+
         protected void Application_Start()
         {
+
+            
             AreaRegistration.RegisterAllAreas();
             counter = 0;
             WebApiConfig.Register(GlobalConfiguration.Configuration);
@@ -37,24 +43,8 @@ namespace CAIROCrons
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-
-            LogManager.LogFactory = new ConsoleLogFactory();
-
-            OrmLiteConfig.DialectProvider = MySqlDialect.Provider;
-
-            string ConnectionString = //"Server = 127.0.0.1; Database = cron; Uid = min; Pwd = 123";
-            ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
-
-            OrmLiteConnectionFactory DbFactory = new OrmLiteConnectionFactory(ConnectionString, MySqlDialect.Provider);
-
-
-            OrmLiteConfig.DialectProvider = MySqlDialect.Provider;
-            using (IDbConnection dbConn = ConnectionString.OpenDbConnection())
-            {
-                const bool overwrite = false;
-                dbConn.CreateTables(overwrite, typeof(Post));
-                dbConn.CreateTables(overwrite, typeof(DBLogger));
-            }
+            DBConn = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+            InitDB();
             services = new SchedulerServices();
             services.Start(1);
          
@@ -66,6 +56,35 @@ namespace CAIROCrons
             {
                 services.Stop();
                 services.Dispose();
+            }
+        }
+
+
+
+        void InitDB()
+        {
+            LogManager.LogFactory = new ConsoleLogFactory();
+
+
+            if (DBConn.StartsWith("Data Source="))
+            { OrmLiteConfig.DialectProvider = SqlServerDialect.Provider; }
+              
+            else
+            { OrmLiteConfig.DialectProvider = MySqlDialect.Provider;}
+
+
+            //OrmLiteConnectionFactory DbFactory = new OrmLiteConnectionFactory(DBConn, MySqlDialect.Provider);
+
+             
+            using (IDbConnection dbConn = DBConn.OpenDbConnection())
+            {
+                const bool overwrite = false;
+                dbConn.CreateTables(overwrite, typeof(Post));
+                dbConn.CreateTables(overwrite, typeof(DBLogger));
+                dbConn.CreateTables(overwrite, typeof(Holidays));
+                //HolidaysServices srv = new HolidaysServices();
+                //srv.InitDB();
+                //srv = null;
             }
         }
     }
