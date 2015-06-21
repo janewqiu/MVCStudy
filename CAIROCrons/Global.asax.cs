@@ -67,13 +67,19 @@ namespace CAIROCrons
 
 
             if (DBConn.StartsWith("Data Source="))
-            { OrmLiteConfig.DialectProvider = SqlServerDialect.Provider; }
+            { 
+                OrmLiteConfig.DialectProvider = SqlServerDialect.Provider;
+                OrmLiteConnectionFactory DbFactory = new OrmLiteConnectionFactory(DBConn, SqlServerDialect.Provider);
+            }
               
             else
-            { OrmLiteConfig.DialectProvider = MySqlDialect.Provider;}
+            { 
+                OrmLiteConfig.DialectProvider = MySqlDialect.Provider;
+                OrmLiteConnectionFactory DbFactory = new OrmLiteConnectionFactory(DBConn, MySqlDialect.Provider);
+            }
 
 
-            //OrmLiteConnectionFactory DbFactory = new OrmLiteConnectionFactory(DBConn, MySqlDialect.Provider);
+            //
 
              
             using (IDbConnection dbConn = DBConn.OpenDbConnection())
