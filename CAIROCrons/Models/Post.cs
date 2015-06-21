@@ -20,6 +20,12 @@ namespace CAIROCrons.Models
          }
 
         public Guid Id { get; set; }
+
+
+        [AutoIncrement]
+        [Alias("PostID")]
+        public int UId { get; set; }
+
         public DateTime Date { get; set; }
 
         [Index(Unique = true)]
@@ -32,20 +38,15 @@ namespace CAIROCrons.Models
         [StringLength(350)]
         public string Summary { get; set; }
 
-        [System.ComponentModel.DataAnnotations.UIHint("WYSIWYG")]
-        [AllowHtml]
-        [StringLength(50000)]
+       
+        [StringLength(8000)]
         public string Details { get; set; }
 
         [StringLength(150)]
         public string Author { get; set; }
         public int TotalComments { get; set; }
         public IList<Comment> Comments { get; set; }
-
-        
-
-
-
+           
          
     }
 }

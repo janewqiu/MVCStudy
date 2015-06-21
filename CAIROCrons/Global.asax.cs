@@ -16,6 +16,7 @@ using ServiceStack.Logging;
 using CAIROCrons.Models;
 using System.Data;
 using System.Configuration;
+using CAIROCrons.Services;
 
 
 namespace CAIROCrons
@@ -25,10 +26,12 @@ namespace CAIROCrons
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        public static int counter = 0;
+        public SchedulerServices services = null;
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
+            counter = 0;
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -50,6 +53,19 @@ namespace CAIROCrons
             {
                 const bool overwrite = false;
                 dbConn.CreateTables(overwrite, typeof(Post));
+                dbConn.CreateTables(overwrite, typeof(DBLogger));
+            }
+            services = new SchedulerServices();
+            services.Start(1);
+         
+        }
+
+        protected void Application_Stop()
+        {
+            if (this.services!=null)
+            {
+                services.Stop();
+                services.Dispose();
             }
         }
     }

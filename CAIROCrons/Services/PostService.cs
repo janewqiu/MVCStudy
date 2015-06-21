@@ -34,7 +34,7 @@ namespace CAIROCrons.Services
         public void Edit(Post post)
         {
             using (IDbConnection dbConn = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString.OpenDbConnection())
-            {
+            { 
                 dbConn.Update(post);
             }
         }
