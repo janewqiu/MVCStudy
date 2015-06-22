@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="CAIROCrons.Services.DataAjax" CodeBehind="DataAjax.svc.cs" %>

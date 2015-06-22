@@ -27,11 +27,11 @@ namespace CAIROCrons
     public class CAIROCronsApp : System.Web.HttpApplication
     {
         public static int counter = 0;
-        public SchedulerServices services = null;
+        public MySimpleScheduleServices simpleSchedule = null;
 
         public static string DBConn = null;
-
-
+        public static string KeepAliveUri = null;
+        public static QuartzScheduler quartz = new QuartzScheduler();
         protected void Application_Start()
         {
 
@@ -42,20 +42,28 @@ namespace CAIROCrons
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+    
             DBConn = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
             InitDB();
-            services = new SchedulerServices();
-            services.Start(1);
-         
+          
+
+            string PingUri = ConfigurationManager.AppSettings["PingServer"];
+            string[] arg = PingUri.Split(new char[] { ',' });
+           
+
+            //simpleSchedule = new MySimpleScheduleServices();
+            //simpleSchedule.Start(1);
+
+            quartz.StartUp();
+
         }
 
         protected void Application_Stop()
         {
-            if (this.services!=null)
+            if (this.simpleSchedule!=null)
             {
-                services.Stop();
-                services.Dispose();
+                simpleSchedule.Stop();
+                simpleSchedule.Dispose();
             }
         }
 

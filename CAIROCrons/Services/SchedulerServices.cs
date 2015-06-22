@@ -7,7 +7,7 @@ using System.Web;
 namespace CAIROCrons.Services
 {
      
-    public class SchedulerServices : IDisposable
+    public class MySimpleScheduleServices : IDisposable
     {
         /// <summary>
         /// Determines the status fo the Scheduler
@@ -32,7 +32,7 @@ namespace CAIROCrons.Services
 
         object SyncLock = new Object();
 
-        public SchedulerServices()
+        public MySimpleScheduleServices()
         {
 
         }
