@@ -9,12 +9,14 @@ namespace CAIROCrons.Controllers
 {
     public class HomeController : Controller
     {
+        private static readonly ILog Log = LogManager.GetLogger(typeof(HomeController));
+
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome to ServiceStack MVC Blog!";
-            System.Diagnostics.Debug.WriteLine("Hi, index");
-            ILog Log = LogManager.GetLogger( this.GetType());
-            Log.Debug("hello log");
+       //     System.Diagnostics.Debug.WriteLine("Hi, index");
+
+            Log.Info("hello log" + DateTime.Now);
             return View();
         }
 

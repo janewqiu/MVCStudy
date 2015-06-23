@@ -85,6 +85,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\LIBS\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Quartz, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LibQuartz\Quartz.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Common">
       <HintPath>..\LibOrm\ServiceStack.Common.dll</HintPath>
     </Reference>
@@ -355,12 +359,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Quartz\Quartz.2010.csproj">
-      <Project>{aef8823b-e45b-4b35-a4d0-c08c1196d017}</Project>
-      <Name>Quartz.2010</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
