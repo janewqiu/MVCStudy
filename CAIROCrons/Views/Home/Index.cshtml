@@ -3,7 +3,8 @@
 }
 
 <script src="@Url.Content("~/Scripts/jquery.dataTables.js")" type="text/javascript"> </script>
- 
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css">
+
  
 <h2>@ViewBag.Message</h2>
 <p>
@@ -24,16 +25,7 @@
             </tr>
         </thead>
 
-        <tfoot>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
-            </tr>
-        </tfoot>
+      
 
         <tbody>
             <tr>
