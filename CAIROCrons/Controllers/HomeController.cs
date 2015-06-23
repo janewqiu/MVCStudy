@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,9 @@ namespace CAIROCrons.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome to ServiceStack MVC Blog!";
-
+            System.Diagnostics.Debug.WriteLine("Hi, index");
+            ILog Log = LogManager.GetLogger( this.GetType());
+            Log.Debug("hello log");
             return View();
         }
 
@@ -30,3 +33,24 @@ namespace CAIROCrons.Controllers
         }
     }
 }
+
+
+/*
+https://cmatskas.com/an-introduction-to-common-logging-api-2/
+ * <configSections>  
+    <sectionGroup name="common">
+      <section name="logging" type="Common.Logging.ConfigurationSectionHandler, Common.Logging"/>
+    </sectionGroup>
+  </configSections>
+  <common>
+    <logging>
+      <factoryAdapter type="Common.Logging.Simple.ConsoleOutLoggerFactoryAdapter, Common.Logging">
+        <arg key="level" value="ALL"/>
+        <arg key="showLogName" value="true"/>
+        <arg key="showDataTime" value="true"/>
+        <arg key="dateTimeFormat" value="yyyy/MM/dd HH:mm:ss:fff"/>
+      </factoryAdapter>
+    </logging>
+  </common>
+ 
+*/

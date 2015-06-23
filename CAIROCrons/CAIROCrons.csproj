@@ -52,8 +52,14 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\LibQuartz\Common.Logging.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Common.Logging.Log4Net1213">
+      <HintPath>..\LibQuartz\Common.Logging.Log4Net1213.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\LIBS\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\LibQuartz\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -78,9 +84,6 @@
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\LIBS\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Quartz">
-      <HintPath>..\LibQuartz\Quartz.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Common">
       <HintPath>..\LibOrm\ServiceStack.Common.dll</HintPath>
@@ -193,23 +196,27 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DebugTextWriter.cs" />
+    <None Include="log4net.config">
+      <SubType>Designer</SubType>
+    </None>
     <Compile Include="Models\CAIROTask.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\DBLogger.cs" />
     <Compile Include="Models\Post.cs" />
-    <Compile Include="ormlite\DataAnnotations\TextAttribute.cs" />
-    <Compile Include="ormlite\MySqlDialect.cs" />
-    <Compile Include="ormlite\MySqlDialectProvider.cs" />
-    <Compile Include="ormlite\MySqlExpression.cs" />
-    <Compile Include="ormlite\OrmLiteBaseFramework.cs" />
-    <Compile Include="ormlite\SqlServerDialect.cs">
+    <Compile Include="Helpers\DataAnnotations\TextAttribute.cs" />
+    <Compile Include="Helpers\MySqlDialect.cs" />
+    <Compile Include="Helpers\MySqlDialectProvider.cs" />
+    <Compile Include="Helpers\MySqlExpression.cs" />
+    <Compile Include="Helpers\OrmLiteBaseFramework.cs" />
+    <Compile Include="Helpers\SqlServerDialect.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ormlite\SqlServerExpression.cs" />
-    <Compile Include="ormlite\SqlServerOrmLiteDialectProvider.cs">
+    <Compile Include="Helpers\SqlServerExpression.cs" />
+    <Compile Include="Helpers\SqlServerOrmLiteDialectProvider.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ormlite\StringHelpers.cs" />
+    <Compile Include="Helpers\StringHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CAIROTaskServices.cs" />
     <Compile Include="Services\CommentService.cs" />
@@ -218,9 +225,12 @@
     </Compile>
     <Compile Include="Services\HolidaysServices.cs" />
     <Compile Include="Services\DBLoggerServices.cs" />
+    <Compile Include="Services\jobs\KeepServerAliveJob.cs" />
     <Compile Include="Services\PostService.cs" />
     <Compile Include="Services\QuartzScheduler.cs" />
-    <Compile Include="Services\SchedulerServices.cs" />
+    <Compile Include="Services\SchedulerServices.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Services\SetupServices.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -303,7 +313,9 @@
     <Content Include="Services\DataAjax.svc" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -330,7 +342,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Web.config" />
     <None Include="readme.txt" />
     <Content Include="Views\Post\AddComment.cshtml" />
     <Content Include="Views\Post\Comment.cshtml" />
@@ -344,6 +355,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Quartz\Quartz.2010.csproj">
+      <Project>{aef8823b-e45b-4b35-a4d0-c08c1196d017}</Project>
+      <Name>Quartz.2010</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

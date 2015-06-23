@@ -26,7 +26,7 @@ namespace CAIROCrons.Services
         {
         }
 
-        public void CreateDB()
+        public void CreateTables()
         {
 
             OrmLiteConfig.DialectProvider = MySqlDialect.Provider;
